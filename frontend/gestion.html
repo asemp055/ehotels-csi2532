@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-Hôtels — Gestion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#E8C4C4;--rose-d:#C9908A;--rose-p:#F9F0F0;--rose-dk:#8B5E5B;
+  --beige:#FAF4F0;--beige2:#EDE0DA;--brown:#5C3D3A;--muted:#A89090;
+  --white:#FFFFFF;--green:#4A8A4A;--red:#C05050;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Jost',sans-serif;font-weight:300;background:var(--beige);color:var(--brown);}
+
+nav{background:var(--white);border-bottom:1px solid var(--beige2);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;box-shadow:0 1px 12px rgba(139,94,91,.07);}
+.logo{font-family:'Playfair Display',serif;font-size:21px;color:var(--brown);text-decoration:none;}
+.logo em{color:var(--rose-d);font-style:italic;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--rose-d);}
+
+.layout{display:flex;min-height:calc(100vh - 60px);}
+
+.sidebar{width:190px;min-width:190px;background:var(--white);border-right:1px solid var(--beige2);padding:28px 0;}
+.sb-btn{display:block;width:100%;text-align:left;padding:13px 26px;font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:none;border:none;border-left:3px solid transparent;cursor:pointer;transition:all .2s;}
+.sb-btn:hover{color:var(--brown);}
+.sb-btn.active{color:var(--rose-d);border-left-color:var(--rose-d);background:var(--rose-p);}
+
+.content{flex:1;padding:36px 40px;}
+.sec{display:none;}
+.sec.active{display:block;}
+
+.page-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:400;margin-bottom:4px;}
+.page-sub{font-size:12px;color:var(--muted);margin-bottom:28px;}
+
+/* FORM */
+.form-box{background:var(--white);border:1px solid var(--beige2);border-radius:12px;padding:24px 28px;margin-bottom:24px;display:none;}
+.form-box.open{display:block;}
+.form-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;margin-bottom:18px;}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px;}
+.f{display:flex;flex-direction:column;gap:6px;}
+.f label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.f input,.f select{background:var(--beige);border:1px solid var(--beige2);border-radius:8px;color:var(--brown);font-family:'Jost',sans-serif;font-size:13px;padding:9px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.f input:focus,.f select:focus{border-color:var(--rose-d);}
+.f select option{background:white;}
+.fa{display:flex;gap:10px;}
+.btn-save{background:var(--rose-d);color:white;border:none;border-radius:50px;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:10px 26px;cursor:pointer;transition:all .2s;}
+.btn-save:hover{background:var(--rose-dk);}
+.btn-cancel{background:transparent;border:1px solid var(--beige2);border-radius:50px;color:var(--muted);font-family:'Jost',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px 26px;cursor:pointer;transition:all .2s;}
+.btn-cancel:hover{border-color:var(--rose);color:var(--rose-d);}
+
+/* TABLE */
+.table-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.btn-new{background:transparent;border:1px solid var(--rose-d);border-radius:50px;color:var(--rose-d);font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:9px 20px;cursor:pointer;transition:all .2s;}
+.btn-new:hover{background:var(--rose-d);color:white;}
+.tw{background:var(--white);border-radius:12px;border:1px solid var(--beige2);overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead{background:var(--rose-p);}
+th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--rose-d);padding:12px 16px;text-align:left;font-weight:500;}
+td{font-size:12px;padding:12px 16px;color:var(--brown);border-bottom:1px solid var(--beige2);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(249,240,240,.4);}
+.badge{display:inline-block;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:50px;font-weight:500;}
+.b-rose{background:var(--rose-p);color:var(--rose-d);}
+.b-green{background:#EDF7ED;color:var(--green);}
+.b-red{background:#FDEAEA;color:var(--red);}
+.b-gray{background:var(--beige2);color:var(--muted);}
+.btn-s{background:none;border:1px solid var(--beige2);border-radius:50px;color:var(--muted);font-family:'Jost',sans-serif;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:4px 11px;cursor:pointer;transition:all .2s;margin-right:3px;}
+.btn-s:hover{border-color:var(--rose-d);color:var(--rose-d);}
+.btn-s.del:hover{border-color:var(--red);color:var(--red);}
+
+/* CHECKIN BOX */
+.cbox{background:var(--white);border:1px solid var(--beige2);border-radius:12px;padding:24px 28px;margin-bottom:20px;}
+.cbox-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--rose-d);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.cbox-title::after{content:'';flex:1;height:1px;background:var(--beige2);}
+
+.toast{position:fixed;bottom:24px;right:24px;background:var(--brown);color:var(--rose-p);border-radius:10px;padding:13px 22px;font-size:13px;box-shadow:0 6px 20px rgba(92,61,58,.2);transform:translateY(70px);opacity:0;transition:all .4s;z-index:300;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.ok{border-left:4px solid var(--rose-d);}
+.toast.err{border-left:4px solid var(--red);}
+.loading{padding:28px;text-align:center;font-size:11px;letter-spacing:2px;color:var(--muted);}
+.empty-t{padding:28px;text-align:center;font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">e<em>·</em>Hôtels</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Recherche</a></li>
+    <li><a href="gestion.html" class="active">Gestion</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <button class="sb-btn active" onclick="show('clients',this)">Clients</button>
+    <button class="sb-btn" onclick="show('employes',this)">Employés</button>
+    <button class="sb-btn" onclick="show('reservations',this)">Réservations</button>
+    <button class="sb-btn" onclick="show('locations',this)">Locations</button>
+    <button class="sb-btn" onclick="show('chambres',this)">Chambres</button>
+  </aside>
+
+  <main class="content">
+
+    <!-- CLIENTS -->
+    <div id="sec-clients" class="sec active">
+      <h1 class="page-title">Clients</h1>
+      <p class="page-sub">Gérer les clients enregistrés</p>
+      <div id="form-client" class="form-box">
+        <h3 class="form-title" id="fc-title">Nouveau client</h3>
+        <div class="fg">
+          <div class="f"><label>Nom complet</label><input id="c-nom" placeholder="Marie Tremblay"></div>
+          <div class="f"><label>NAS</label><input id="c-nas" placeholder="000-000-000"></div>
+          <div class="f"><label>Adresse</label><input id="c-adr" placeholder="123 rue Principale, Ottawa, ON"></div>
+        </div>
+        <input type="hidden" id="c-id">
+        <div class="fa">
+          <button class="btn-save" onclick="saveClient()">Enregistrer</button>
+          <button class="btn-cancel" onclick="closeForm('form-client')">Annuler</button>
+        </div>
+      </div>
+      <div class="table-top"><span></span><button class="btn-new" onclick="openFormClient()">+ Nouveau client</button></div>
+      <div class="tw"><div id="tb-clients"><div class="loading">Chargement…</div></div></div>
+    </div>
+
+    <!-- EMPLOYÉS -->
+    <div id="sec-employes" class="sec">
+      <h1 class="page-title">Employés</h1>
+      <p class="page-sub">Gérer les employés par hôtel</p>
+      <div id="form-employe" class="form-box">
+        <h3 class="form-title" id="fe-title">Nouvel employé</h3>
+        <div class="fg">
+          <div class="f"><label>Nom complet</label><input id="e-nom" placeholder="Jean Dupont"></div>
+          <div class="f"><label>NAS</label><input id="e-nas" placeholder="000-000-000"></div>
+          <div class="f"><label>Adresse</label><input id="e-adr" placeholder="456 rue Maple, Toronto, ON"></div>
+          <div class="f">
+            <label>Rôle</label>
+            <select id="e-role">
+              <option value="gestionnaire">Gestionnaire</option>
+              <option value="réceptionniste">Réceptionniste</option>
+              <option value="femme de chambre">Femme de chambre</option>
+              <option value="technicien">Technicien</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="f"><label>ID Hôtel</label><input id="e-hotel" type="number" placeholder="1"></div>
+        </div>
+        <input type="hidden" id="e-id">
+        <div class="fa">
+          <button class="btn-save" onclick="saveEmploye()">Enregistrer</button>
+          <button class="btn-cancel" onclick="closeForm('form-employe')">Annuler</button>
+        </div>
+      </div>
+      <div class="table-top"><span></span><button class="btn-new" onclick="openFormEmploye()">+ Nouvel employé</button></div>
+      <div class="tw"><div id="tb-employes"><div class="loading">Chargement…</div></div></div>
+    </div>
+
+    <!-- RÉSERVATIONS -->
+    <div id="sec-reservations" class="sec">
+      <h1 class="page-title">Réservations</h1>
+      <p class="page-sub">Historique et gestion des réservations</p>
+      <div class="tw"><div id="tb-reservations"><div class="loading">Chargement…</div></div></div>
+    </div>
+
+    <!-- LOCATIONS -->
+    <div id="sec-locations" class="sec">
+      <h1 class="page-title">Locations</h1>
+      <p class="page-sub">Locations directes et conversions check-in</p>
+
+      <div class="cbox">
+        <p class="cbox-title">Convertir une réservation en location (check-in)</p>
+        <div class="fg">
+          <div class="f"><label>ID Réservation</label><input id="conv-res" type="number" placeholder="Ex: 1"></div>
+          <div class="f"><label>ID Employé</label><input id="conv-emp" type="number" placeholder="Ex: 1"></div>
+        </div>
+        <button class="btn-save" onclick="convertir()">Effectuer le check-in</button>
+      </div>
+
+      <div class="cbox">
+        <p class="cbox-title">Nouvelle location directe (sans réservation)</p>
+        <div class="fg">
+          <div class="f"><label>ID Chambre</label><input id="ld-chambre" type="number" placeholder="Ex: 5"></div>
+          <div class="f"><label>ID Client</label><input id="ld-client" type="number" placeholder="Ex: 2"></div>
+          <div class="f"><label>ID Employé</label><input id="ld-employe" type="number" placeholder="Ex: 1"></div>
+          <div class="f"><label>Date début</label><input id="ld-debut" type="date"></div>
+          <div class="f"><label>Date fin</label><input id="ld-fin" type="date"></div>
+        </div>
+        <button class="btn-save" onclick="locationDirecte()">Créer la location</button>
+      </div>
+
+      <div class="tw"><div id="tb-locations"><div class="loading">Chargement…</div></div></div>
+    </div>
+
+    <!-- CHAMBRES -->
+    <div id="sec-chambres" class="sec">
+      <h1 class="page-title">Chambres</h1>
+      <p class="page-sub">Gérer les chambres par hôtel</p>
+      <div id="form-chambre" class="form-box">
+        <h3 class="form-title" id="fch-title">Nouvelle chambre</h3>
+        <div class="fg">
+          <div class="f"><label>ID Hôtel</label><input id="ch-hotel" type="number" placeholder="1"></div>
+          <div class="f"><label>Prix ($/nuit)</label><input id="ch-prix" type="number" step="0.01" placeholder="150"></div>
+          <div class="f">
+            <label>Capacité</label>
+            <select id="ch-cap">
+              <option value="simple">Simple</option>
+              <option value="double">Double</option>
+              <option value="triple">Triple</option>
+              <option value="suite">Suite</option>
+            </select>
+          </div>
+          <div class="f"><label>Vue</label><input id="ch-vue" placeholder="mer, montagne, ville…"></div>
+          <div class="f"><label>Superficie (m²)</label><input id="ch-sup" type="number" placeholder="30"></div>
+          <div class="f"><label>Commodités</label><input id="ch-com" placeholder="TV, WiFi, Climatisation"></div>
+          <div class="f">
+            <label>Lit supplémentaire</label>
+            <select id="ch-lit">
+              <option value="false">Non</option>
+              <option value="true">Oui</option>
+            </select>
+          </div>
+          <div class="f"><label>État / Dommages</label><input id="ch-dom" placeholder="Laisser vide si aucun"></div>
+        </div>
+        <input type="hidden" id="ch-id">
+        <div class="fa">
+          <button class="btn-save" onclick="saveChambre()">Enregistrer</button>
+          <button class="btn-cancel" onclick="closeForm('form-chambre')">Annuler</button>
+        </div>
+      </div>
+      <div class="table-top"><span></span><button class="btn-new" onclick="openFormChambre()">+ Nouvelle chambre</button></div>
+      <div class="tw"><div id="tb-chambres"><div class="loading">Chargement…</div></div></div>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'http://localhost:8080';
+
+function show(name, btn) {
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  btn.classList.add('active');
+  const loaders = {
+    clients:      chargerClients,
+    employes:     chargerEmployes,
+    reservations: chargerReservations,
+    locations:    chargerLocations,
+    chambres:     chargerChambres
+  };
+  if (loaders[name]) loaders[name]();
+}
+
+function closeForm(id){document.getElementById(id).classList.remove('open');}
+function v(id){return document.getElementById(id).value.trim();}
+
+// ── TOAST ─────────────────────────────────────────────────
+function toast(msg,type){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.className='toast '+type+' show';
+  setTimeout(()=>el.classList.remove('show'),4000);
+}
+
+// ── CLIENTS ───────────────────────────────────────────────
+async function chargerClients(){
+  try {
+    const data=await(await fetch(`${API}/api/clients`)).json();
+    const el=document.getElementById('tb-clients');
+    if(!data.length){el.innerHTML='<div class="empty-t">Aucun client</div>';return;}
+    el.innerHTML=`<table><thead><tr>
+      <th>ID</th><th>Nom</th><th>NAS</th><th>Adresse</th><th>Inscription</th><th>Actions</th>
+    </tr></thead><tbody>${data.map(c=>`<tr>
+      <td><span class="badge b-gray">#${c.clientId}</span></td>
+      <td>${c.nomComplet}</td><td>${c.nas}</td><td>${c.adresse}</td><td>${c.dateInscription}</td>
+      <td>
+        <button class="btn-s" onclick='editerClient(${JSON.stringify(c)})'>Modifier</button>
+        <button class="btn-s del" onclick="supprimerClient(${c.clientId})">Supprimer</button>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+  } catch(e){document.getElementById('tb-clients').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
+}
+
+function openFormClient(){
+  ['c-nom','c-nas','c-adr','c-id'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fc-title').textContent='Nouveau client';
+  document.getElementById('form-client').classList.add('open');
+}
+
+function editerClient(c){
+  document.getElementById('c-nom').value=c.nomComplet;
+  document.getElementById('c-nas').value=c.nas;
+  document.getElementById('c-adr').value=c.adresse;
+  document.getElementById('c-id').value=c.clientId;
+  document.getElementById('fc-title').textContent='Modifier client';
+  document.getElementById('form-client').classList.add('open');
+}
+
+async function saveClient(){
+  const id=v('c-id');
+  const body=new URLSearchParams({nomComplet:v('c-nom'),nas:v('c-nas'),adresse:v('c-adr')});
+  if(id) body.append('clientId',id);
+  try {
+    const data=await(await fetch(`${API}/api/clients`,{method:id?'PUT':'POST',body})).json();
+    if(data.success!==false){closeForm('form-client');chargerClients();toast(id?'Client modifié':'Client ajouté','ok');}
+    else toast('Erreur : '+(data.erreur||''),'err');
+  } catch(e){toast('Erreur serveur','err');}
+}
+
+async function supprimerClient(id){
+  if(!confirm('Supprimer ce client ?')) return;
+  try{
+    await fetch(`${API}/api/clients?clientId=${id}`,{method:'DELETE'});
+    chargerClients(); toast('Client supprimé','ok');
+  }catch(e){toast('Erreur serveur','err');}
+}
+
+// ── EMPLOYÉS ──────────────────────────────────────────────
+async function chargerEmployes(){
+  try {
+    const data=await(await fetch(`${API}/api/employes`)).json();
+    const el=document.getElementById('tb-employes');
+    if(!data.length){el.innerHTML='<div class="empty-t">Aucun employé</div>';return;}
+    el.innerHTML=`<table><thead><tr>
+      <th>ID</th><th>Nom</th><th>Rôle</th><th>Hôtel</th><th>NAS</th><th>Actions</th>
+    </tr></thead><tbody>${data.map(e=>`<tr>
+      <td><span class="badge b-gray">#${e.employeId}</span></td>
+      <td>${e.nomComplet}</td>
+      <td><span class="badge ${e.role==='gestionnaire'?'b-rose':'b-gray'}">${e.role}</span></td>
+      <td>${e.hotel}</td><td>${e.nas}</td>
+      <td>
+        <button class="btn-s" onclick='editerEmploye(${JSON.stringify(e)})'>Modifier</button>
+        <button class="btn-s del" onclick="supprimerEmploye(${e.employeId})">Supprimer</button>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+  } catch(e){document.getElementById('tb-employes').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
+}
+
+function openFormEmploye(){
+  ['e-nom','e-nas','e-adr','e-hotel','e-id'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fe-title').textContent='Nouvel employé';
+  document.getElementById('form-employe').classList.add('open');
+}
+
+function editerEmploye(e){
+  document.getElementById('e-nom').value=e.nomComplet;
+  document.getElementById('e-nas').value=e.nas;
+  document.getElementById('e-adr').value=e.adresse;
+  document.getElementById('e-role').value=e.role;
+  document.getElementById('e-hotel').value=e.hotelId;
+  document.getElementById('e-id').value=e.employeId;
+  document.getElementById('fe-title').textContent='Modifier employé';
+  document.getElementById('form-employe').classList.add('open');
+}
+
+async function saveEmploye(){
+  const id=v('e-id');
+  const body=new URLSearchParams({nomComplet:v('e-nom'),nas:v('e-nas'),adresse:v('e-adr'),role:v('e-role'),hotelId:v('e-hotel')});
+  if(id) body.append('employeId',id);
+  try {
+    const data=await(await fetch(`${API}/api/employes`,{method:id?'PUT':'POST',body})).json();
+    if(data.success!==false){closeForm('form-employe');chargerEmployes();toast(id?'Employé modifié':'Employé ajouté','ok');}
+    else toast('Erreur : '+(data.erreur||''),'err');
+  } catch(e){toast('Erreur serveur','err');}
+}
+
+async function supprimerEmploye(id){
+  if(!confirm('Supprimer cet employé ?')) return;
+  try{
+    await fetch(`${API}/api/employes?employeId=${id}`,{method:'DELETE'});
+    chargerEmployes(); toast('Employé supprimé','ok');
+  }catch(e){toast('Erreur serveur','err');}
+}
+
+// ── RÉSERVATIONS ──────────────────────────────────────────
+async function chargerReservations(){
+  try {
+    const data=await(await fetch(`${API}/api/reservation`)).json();
+    const el=document.getElementById('tb-reservations');
+    if(!data.length){el.innerHTML='<div class="empty-t">Aucune réservation</div>';return;}
+    el.innerHTML=`<table><thead><tr>
+      <th>ID</th><th>Client</th><th>Hôtel</th><th>Arrivée</th><th>Départ</th><th>Prix/nuit</th><th>Statut</th><th>Actions</th>
+    </tr></thead><tbody>${data.map(r=>`<tr>
+      <td><span class="badge b-gray">#${r.id}</span></td>
+      <td>${r.clientNom}</td>
+      <td>${r.hotel}<br><small style="color:var(--muted)">${r.chaine}</small></td>
+      <td>${r.dateDebut}</td><td>${r.dateFin}</td>
+      <td>$${r.prix}</td>
+      <td><span class="badge ${r.statut==='confirmée'||r.statut==='confirmee'?'b-green':r.statut==='annulee'||r.statut==='annulée'?'b-red':'b-rose'}">${r.statut}</span></td>
+      <td>${r.statut==='en attente'?`<button class="btn-s del" onclick="annulerRes(${r.id})">Annuler</button>`:'—'}</td>
+    </tr>`).join('')}</tbody></table>`;
+  } catch(e){document.getElementById('tb-reservations').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
+}
+
+async function annulerRes(id){
+  if(!confirm('Annuler cette réservation ?')) return;
+  try{
+    await fetch(`${API}/api/reservation?id=${id}`,{method:'DELETE'});
+    chargerReservations(); toast('Réservation annulée','ok');
+  }catch(e){toast('Erreur serveur','err');}
+}
+
+// ── LOCATIONS ─────────────────────────────────────────────
+async function chargerLocations(){
+  try {
+    const data=await(await fetch(`${API}/api/location`)).json();
+    const el=document.getElementById('tb-locations');
+    if(!data.length){el.innerHTML='<div class="empty-t">Aucune location</div>';return;}
+    el.innerHTML=`<table><thead><tr>
+      <th>ID</th><th>Client</th><th>Hôtel</th><th>Employé</th><th>Check-in</th><th>Départ</th><th>Réserv.</th><th>Prix/nuit</th>
+    </tr></thead><tbody>${data.map(l=>`<tr>
+      <td><span class="badge b-gray">#${l.id}</span></td>
+      <td>${l.clientNom}</td><td>${l.hotel}</td><td>${l.employeNom}</td>
+      <td>${l.dateCheckin}</td><td>${l.dateFin}</td>
+      <td>${l.reservationId?'#'+l.reservationId:'<span class="badge b-gray">directe</span>'}</td>
+      <td>$${l.prix}</td>
+    </tr>`).join('')}</tbody></table>`;
+  } catch(e){document.getElementById('tb-locations').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
+}
+
+async function convertir(){
+  const resId=v('conv-res'), empId=v('conv-emp');
+  if(!resId||!empId){toast('Remplissez les deux champs','err');return;}
+  try {
+    const res=await(await fetch(`${API}/api/reservation`)).json();
+    const r=res.find(x=>x.id==resId);
+    if(!r){toast('Réservation introuvable','err');return;}
+    if(r.statut==='annulee'||r.statut==='annulée'){toast('Réservation déjà annulée','err');return;}
+    const body=new URLSearchParams({chambreId:r.chambreId,clientId:r.clientId,employeId:empId,reservationId:resId,dateDebut:r.dateDebut,dateFin:r.dateFin});
+    const data=await(await fetch(`${API}/api/location`,{method:'POST',body})).json();
+    if(data.success){toast(`Check-in effectué — Location #${data.locationId}`,'ok');chargerLocations();}
+    else toast('Erreur : '+(data.erreur||''),'err');
+  } catch(e){toast('Erreur serveur','err');}
+}
+
+async function locationDirecte(){
+  const body=new URLSearchParams({chambreId:v('ld-chambre'),clientId:v('ld-client'),employeId:v('ld-employe'),dateDebut:v('ld-debut'),dateFin:v('ld-fin')});
+  try {
+    const data=await(await fetch(`${API}/api/location`,{method:'POST',body})).json();
+    if(data.success){toast(`Location #${data.locationId} créée`,'ok');chargerLocations();}
+    else toast('Erreur : '+(data.erreur||''),'err');
+  } catch(e){toast('Erreur serveur','err');}
+}
+
+// ── CHAMBRES ──────────────────────────────────────────────
+async function chargerChambres(){
+  try {
+    const data=await(await fetch(`${API}/api/chambres`)).json();
+    const el=document.getElementById('tb-chambres');
+    if(!data.length){el.innerHTML='<div class="empty-t">Aucune chambre</div>';return;}
+    el.innerHTML=`<table><thead><tr>
+      <th>ID</th><th>Hôtel</th><th>Chaîne</th><th>Capacité</th><th>Vue</th><th>Superficie</th><th>Prix</th><th>Actions</th>
+    </tr></thead><tbody>${data.map(c=>`<tr>
+      <td><span class="badge b-gray">#${c.chambreId}</span></td>
+      <td>${c.hotel}</td><td>${c.chaine}</td>
+      <td><span class="badge b-rose">${c.capacite}</span></td>
+      <td>${c.vue}</td><td>${c.superficie} m²</td><td>$${c.prix}</td>
+      <td>
+        <button class="btn-s" onclick='editerChambre(${JSON.stringify(c)})'>Modifier</button>
+        <button class="btn-s del" onclick="supprimerChambre(${c.chambreId})">Supprimer</button>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+  } catch(e){document.getElementById('tb-chambres').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
+}
+
+function openFormChambre(){
+  ['ch-hotel','ch-prix','ch-vue','ch-sup','ch-com','ch-dom','ch-id'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fch-title').textContent='Nouvelle chambre';
+  document.getElementById('form-chambre').classList.add('open');
+}
+
+function editerChambre(c){
+  document.getElementById('ch-hotel').value=c.hotelId;
+  document.getElementById('ch-prix').value=c.prix;
+  document.getElementById('ch-cap').value=c.capacite;
+  document.getElementById('ch-vue').value=c.vue;
+  document.getElementById('ch-sup').value=c.superficie;
+  document.getElementById('ch-com').value=c.commodites;
+  document.getElementById('ch-lit').value=c.litSup?'true':'false';
+  document.getElementById('ch-dom').value=c.dommages||'';
+  document.getElementById('ch-id').value=c.chambreId;
+  document.getElementById('fch-title').textContent='Modifier chambre';
+  document.getElementById('form-chambre').classList.add('open');
+}
+
+async function saveChambre(){
+  const id=v('ch-id');
+  const body=new URLSearchParams({hotelId:v('ch-hotel'),prix:v('ch-prix'),capacite:v('ch-cap'),vue:v('ch-vue'),superficie:v('ch-sup'),commodites:v('ch-com'),litSup:v('ch-lit'),dommages:v('ch-dom')});
+  if(id) body.append('chambreId',id);
+  try {
+    const data=await(await fetch(`${API}/api/chambres`,{method:id?'PUT':'POST',body})).json();
+    if(data.success!==false){closeForm('form-chambre');chargerChambres();toast(id?'Chambre modifiée':'Chambre ajoutée','ok');}
+    else toast('Erreur : '+(data.erreur||''),'err');
+  } catch(e){toast('Erreur serveur','err');}
+}
+
+async function supprimerChambre(id){
+  if(!confirm('Supprimer cette chambre ?')) return;
+  try{
+    await fetch(`${API}/api/chambres?chambreId=${id}`,{method:'DELETE'});
+    chargerChambres(); toast('Chambre supprimée','ok');
+  }catch(e){toast('Erreur serveur','err');}
+}
+
+// Init
+chargerClients();
+</script>
+</body>
+</html>
