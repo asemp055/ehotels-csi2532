@@ -15,16 +15,16 @@
 body{font-family:'Jost',sans-serif;font-weight:300;background:var(--beige);color:var(--brown);}
 
 nav{background:var(--white);border-bottom:1px solid var(--beige2);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;box-shadow:0 1px 12px rgba(139,94,91,.07);}
-.logo{font-family:'Playfair Display',serif;font-size:21px;color:var(--brown);text-decoration:none;}
+.logo{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown);text-decoration:none;}
 .logo em{color:var(--rose-d);font-style:italic;}
 .nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
 .nav-links a:hover,.nav-links a.active{color:var(--rose-d);}
 
 .layout{display:flex;min-height:calc(100vh - 60px);}
 
 .sidebar{width:190px;min-width:190px;background:var(--white);border-right:1px solid var(--beige2);padding:28px 0;}
-.sb-btn{display:block;width:100%;text-align:left;padding:13px 26px;font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:none;border:none;border-left:3px solid transparent;cursor:pointer;transition:all .2s;}
+.sb-btn{display:block;width:100%;text-align:left;padding:13px 26px;font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:none;border:none;border-left:3px solid transparent;cursor:pointer;transition:all .2s;}
 .sb-btn:hover{color:var(--brown);}
 .sb-btn.active{color:var(--rose-d);border-left-color:var(--rose-d);background:var(--rose-p);}
 
@@ -32,56 +32,56 @@ nav{background:var(--white);border-bottom:1px solid var(--beige2);padding:0 40px
 .sec{display:none;}
 .sec.active{display:block;}
 
-.page-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:400;margin-bottom:4px;}
-.page-sub{font-size:12px;color:var(--muted);margin-bottom:28px;}
+.page-title{font-family:'Playfair Display',serif;font-size:34px;font-weight:400;margin-bottom:4px;}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
 
 /* FORM */
 .form-box{background:var(--white);border:1px solid var(--beige2);border-radius:12px;padding:24px 28px;margin-bottom:24px;display:none;}
 .form-box.open{display:block;}
-.form-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;margin-bottom:18px;}
+.form-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:400;margin-bottom:18px;}
 .fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px;}
 .f{display:flex;flex-direction:column;gap:6px;}
-.f label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
-.f input,.f select{background:var(--beige);border:1px solid var(--beige2);border-radius:8px;color:var(--brown);font-family:'Jost',sans-serif;font-size:13px;padding:9px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.f label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.f input,.f select{background:var(--beige);border:1px solid var(--beige2);border-radius:8px;color:var(--brown);font-family:'Jost',sans-serif;font-size:14px;padding:9px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;}
 .f input:focus,.f select:focus{border-color:var(--rose-d);}
 .f select option{background:white;}
 .fa{display:flex;gap:10px;}
-.btn-save{background:var(--rose-d);color:white;border:none;border-radius:50px;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:10px 26px;cursor:pointer;transition:all .2s;}
+.btn-save{background:var(--rose-d);color:white;border:none;border-radius:50px;font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:10px 26px;cursor:pointer;transition:all .2s;}
 .btn-save:hover{background:var(--rose-dk);}
-.btn-cancel{background:transparent;border:1px solid var(--beige2);border-radius:50px;color:var(--muted);font-family:'Jost',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px 26px;cursor:pointer;transition:all .2s;}
+.btn-cancel{background:transparent;border:1px solid var(--beige2);border-radius:50px;color:var(--muted);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:10px 26px;cursor:pointer;transition:all .2s;}
 .btn-cancel:hover{border-color:var(--rose);color:var(--rose-d);}
 
 /* TABLE */
 .table-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.btn-new{background:transparent;border:1px solid var(--rose-d);border-radius:50px;color:var(--rose-d);font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:9px 20px;cursor:pointer;transition:all .2s;}
+.btn-new{background:transparent;border:1px solid var(--rose-d);border-radius:50px;color:var(--rose-d);font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:9px 20px;cursor:pointer;transition:all .2s;}
 .btn-new:hover{background:var(--rose-d);color:white;}
 .tw{background:var(--white);border-radius:12px;border:1px solid var(--beige2);overflow:hidden;}
 table{width:100%;border-collapse:collapse;}
 thead{background:var(--rose-p);}
-th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--rose-d);padding:12px 16px;text-align:left;font-weight:500;}
-td{font-size:12px;padding:12px 16px;color:var(--brown);border-bottom:1px solid var(--beige2);}
+th{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--rose-d);padding:12px 16px;text-align:left;font-weight:500;}
+td{font-size:13px;padding:12px 16px;color:var(--brown);border-bottom:1px solid var(--beige2);}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(249,240,240,.4);}
-.badge{display:inline-block;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:50px;font-weight:500;}
+.badge{display:inline-block;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:50px;font-weight:500;}
 .b-rose{background:var(--rose-p);color:var(--rose-d);}
 .b-green{background:#EDF7ED;color:var(--green);}
 .b-red{background:#FDEAEA;color:var(--red);}
 .b-gray{background:var(--beige2);color:var(--muted);}
-.btn-s{background:none;border:1px solid var(--beige2);border-radius:50px;color:var(--muted);font-family:'Jost',sans-serif;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:4px 11px;cursor:pointer;transition:all .2s;margin-right:3px;}
+.btn-s{background:none;border:1px solid var(--beige2);border-radius:50px;color:var(--muted);font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:4px 11px;cursor:pointer;transition:all .2s;margin-right:3px;}
 .btn-s:hover{border-color:var(--rose-d);color:var(--rose-d);}
 .btn-s.del:hover{border-color:var(--red);color:var(--red);}
 
 /* CHECKIN BOX */
 .cbox{background:var(--white);border:1px solid var(--beige2);border-radius:12px;padding:24px 28px;margin-bottom:20px;}
-.cbox-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--rose-d);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.cbox-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--rose-d);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
 .cbox-title::after{content:'';flex:1;height:1px;background:var(--beige2);}
 
-.toast{position:fixed;bottom:24px;right:24px;background:var(--brown);color:var(--rose-p);border-radius:10px;padding:13px 22px;font-size:13px;box-shadow:0 6px 20px rgba(92,61,58,.2);transform:translateY(70px);opacity:0;transition:all .4s;z-index:300;}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--brown);color:var(--rose-p);border-radius:10px;padding:13px 22px;font-size:14px;box-shadow:0 6px 20px rgba(92,61,58,.2);transform:translateY(70px);opacity:0;transition:all .4s;z-index:300;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.ok{border-left:4px solid var(--rose-d);}
 .toast.err{border-left:4px solid var(--red);}
-.loading{padding:28px;text-align:center;font-size:11px;letter-spacing:2px;color:var(--muted);}
-.empty-t{padding:28px;text-align:center;font-size:12px;color:var(--muted);}
+.loading{padding:28px;text-align:center;font-size:12px;letter-spacing:2px;color:var(--muted);}
+.empty-t{padding:28px;text-align:center;font-size:13px;color:var(--muted);}
 </style>
 </head>
 <body>
@@ -270,19 +270,57 @@ function toast(msg,type){
 // ── CLIENTS ───────────────────────────────────────────────
 async function chargerClients(){
   try {
-    const data=await(await fetch(`${API}/api/clients`)).json();
+    const clients=await(await fetch(`${API}/api/clients`)).json();
+    const locations=await(await fetch(`${API}/api/location`)).json();
+    const reservations=await(await fetch(`${API}/api/reservation`)).json();
     const el=document.getElementById('tb-clients');
-    if(!data.length){el.innerHTML='<div class="empty-t">Aucun client</div>';return;}
-    el.innerHTML=`<table><thead><tr>
-      <th>ID</th><th>Nom</th><th>NAS</th><th>Adresse</th><th>Inscription</th><th>Actions</th>
-    </tr></thead><tbody>${data.map(c=>`<tr>
-      <td><span class="badge b-gray">#${c.clientId}</span></td>
-      <td>${c.nomComplet}</td><td>${c.nas}</td><td>${c.adresse}</td><td>${c.dateInscription}</td>
-      <td>
-        <button class="btn-s" onclick='editerClient(${JSON.stringify(c)})'>Modifier</button>
-        <button class="btn-s del" onclick="supprimerClient(${c.clientId})">Supprimer</button>
-      </td>
-    </tr>`).join('')}</tbody></table>`;
+    if(!clients.length){el.innerHTML='<div class="empty-t">Aucun client</div>';return;}
+    
+    // Créer une map client -> chaînes hôtelières
+    const clientChaines={};
+    clients.forEach(c=>{clientChaines[c.clientId]=new Set();});
+    
+    // Ajouter chaînes depuis locations
+    locations.forEach(l=>{if(clientChaines[l.clientId]) clientChaines[l.clientId].add(l.chaine);});
+    
+    // Ajouter chaînes depuis réservations
+    reservations.forEach(r=>{if(clientChaines[r.clientId]) clientChaines[r.clientId].add(r.chaine);});
+    
+    // Grouper clients par chaîne
+    const grouped={};
+    clients.forEach(c=>{
+      const chaines=Array.from(clientChaines[c.clientId]);
+      if(chaines.length===0) {
+        if(!grouped['Non associé']) grouped['Non associé']=[];
+        grouped['Non associé'].push(c);
+      } else {
+        chaines.forEach(chaine=>{
+          if(!grouped[chaine]) grouped[chaine]=[];
+          grouped[chaine].push(c);
+        });
+      }
+    });
+    
+    let html='';
+    Object.keys(grouped).sort().forEach(chaineName=>{
+      html+=`<div class="cbox">
+        <p class="cbox-title">${chaineName}</p>
+        <table><thead><tr>
+          <th>ID</th><th>Nom</th><th>NAS</th><th>Adresse</th><th>Inscription</th><th>Actions</th>
+        </tr></thead><tbody>`;
+        grouped[chaineName].forEach(c=>{
+          html+=`<tr>
+            <td><span class="badge b-gray">#${c.clientId}</span></td>
+            <td>${c.nomComplet}</td><td>${c.nas}</td><td>${c.adresse}</td><td>${c.dateInscription}</td>
+            <td>
+              <button class="btn-s" onclick='editerClient(${JSON.stringify(c)})'>Modifier</button>
+              <button class="btn-s del" onclick="supprimerClient(${c.clientId})">Supprimer</button>
+            </td>
+          </tr>`;
+        });
+        html+=`</tbody></table></div>`;
+    });
+    el.innerHTML=html;
   } catch(e){document.getElementById('tb-clients').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
 }
 
@@ -326,18 +364,36 @@ async function chargerEmployes(){
     const data=await(await fetch(`${API}/api/employes`)).json();
     const el=document.getElementById('tb-employes');
     if(!data.length){el.innerHTML='<div class="empty-t">Aucun employé</div>';return;}
-    el.innerHTML=`<table><thead><tr>
-      <th>ID</th><th>Nom</th><th>Rôle</th><th>Hôtel</th><th>NAS</th><th>Actions</th>
-    </tr></thead><tbody>${data.map(e=>`<tr>
-      <td><span class="badge b-gray">#${e.employeId}</span></td>
-      <td>${e.nomComplet}</td>
-      <td><span class="badge ${e.role==='gestionnaire'?'b-rose':'b-gray'}">${e.role}</span></td>
-      <td>${e.hotel}</td><td>${e.nas}</td>
-      <td>
-        <button class="btn-s" onclick='editerEmploye(${JSON.stringify(e)})'>Modifier</button>
-        <button class="btn-s del" onclick="supprimerEmploye(${e.employeId})">Supprimer</button>
-      </td>
-    </tr>`).join('')}</tbody></table>`;
+    
+    // Grouper par hôtel
+    const grouped={};
+    data.forEach(e=>{
+      if(!grouped[e.hotel]) grouped[e.hotel]={hotelId:e.hotelId,employes:[]};
+      grouped[e.hotel].employes.push(e);
+    });
+    
+    let html='';
+    Object.keys(grouped).sort().forEach(hotelName=>{
+      html+=`<div class="cbox">
+        <p class="cbox-title">${hotelName}</p>
+        <table><thead><tr>
+          <th>ID</th><th>Nom</th><th>Rôle</th><th>NAS</th><th>Actions</th>
+        </tr></thead><tbody>`;
+      grouped[hotelName].employes.forEach(e=>{
+        html+=`<tr>
+          <td><span class="badge b-gray">#${e.employeId}</span></td>
+          <td>${e.nomComplet}</td>
+          <td><span class="badge ${e.role==='gestionnaire'?'b-rose':'b-gray'}">${e.role}</span></td>
+          <td>${e.nas}</td>
+          <td>
+            <button class="btn-s" onclick='editerEmploye(${JSON.stringify(e)})'>Modifier</button>
+            <button class="btn-s del" onclick="supprimerEmploye(${e.employeId})">Supprimer</button>
+          </td>
+        </tr>`;
+      });
+      html+=`</tbody></table></div>`;
+    });
+    el.innerHTML=html;
   } catch(e){document.getElementById('tb-employes').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
 }
 
@@ -453,18 +509,37 @@ async function chargerChambres(){
     const data=await(await fetch(`${API}/api/chambres`)).json();
     const el=document.getElementById('tb-chambres');
     if(!data.length){el.innerHTML='<div class="empty-t">Aucune chambre</div>';return;}
-    el.innerHTML=`<table><thead><tr>
-      <th>ID</th><th>Hôtel</th><th>Chaîne</th><th>Capacité</th><th>Vue</th><th>Superficie</th><th>Prix</th><th>Actions</th>
-    </tr></thead><tbody>${data.map(c=>`<tr>
-      <td><span class="badge b-gray">#${c.chambreId}</span></td>
-      <td>${c.hotel}</td><td>${c.chaine}</td>
-      <td><span class="badge b-rose">${c.capacite}</span></td>
-      <td>${c.vue}</td><td>${c.superficie} m²</td><td>$${c.prix}</td>
-      <td>
-        <button class="btn-s" onclick='editerChambre(${JSON.stringify(c)})'>Modifier</button>
-        <button class="btn-s del" onclick="supprimerChambre(${c.chambreId})">Supprimer</button>
-      </td>
-    </tr>`).join('')}</tbody></table>`;
+    
+    // Grouper par chaîne hôtelière
+    const grouped={};
+    data.forEach(c=>{
+      if(!grouped[c.chaine]) grouped[c.chaine]=[];
+      grouped[c.chaine].push(c);
+    });
+    
+    let html='';
+    Object.keys(grouped).sort().forEach(chaineName=>{
+      html+=`<div class="cbox">
+        <p class="cbox-title">${chaineName}</p>
+        <table><thead><tr>
+          <th>ID</th><th>Hôtel</th><th>Capacité</th><th>Vue</th><th>Superficie</th><th>Prix</th><th>Commodités</th><th>Actions</th>
+        </tr></thead><tbody>`;
+        grouped[chaineName].forEach(c=>{
+          html+=`<tr>
+            <td><span class="badge b-gray">#${c.chambreId}</span></td>
+            <td>${c.hotel}</td>
+            <td><span class="badge b-rose">${c.capacite}</span></td>
+            <td>${c.vue}</td><td>${c.superficie} m²</td><td>$${c.prix}</td>
+            <td>${c.commodites||'-'}</td>
+            <td>
+              <button class="btn-s" onclick='editerChambre(${JSON.stringify(c)})'>Modifier</button>
+              <button class="btn-s del" onclick="supprimerChambre(${c.chambreId})">Supprimer</button>
+            </td>
+          </tr>`;
+        });
+        html+=`</tbody></table></div>`;
+    });
+    el.innerHTML=html;
   } catch(e){document.getElementById('tb-chambres').innerHTML='<div class="empty-t">Erreur de connexion</div>';}
 }
 
